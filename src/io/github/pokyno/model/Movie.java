@@ -5,7 +5,9 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude
@@ -14,6 +16,7 @@ public class Movie {
 	private static int counterId = 0, counterImdb = 0;
 	private int id, imdb, duur;
 	private String titel, regiseur, beschrijving, date;
+	private double averageScore = 0; //0 betekend nog niet gerate
 	
 	public Movie(){
 		
@@ -46,7 +49,8 @@ public class Movie {
 	/**
 	 * @return the id
 	 */
-	@XmlElement
+	@XmlTransient
+	@JsonIgnore
 	public int getId() {
 		return id;
 	}
@@ -135,9 +139,18 @@ public class Movie {
 		this.date = date;
 	}
 	
+	public void setAverageScore(double newAverage){
+		this.averageScore = newAverage;
+	}
+	
+	public double getAverageScore(){
+		return averageScore;
+	}
+	
 	@Override
 	public String toString() {
 		return titel;
 	}
+	
 	
 }

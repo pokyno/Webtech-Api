@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Model {
 	private ArrayList<Movie> movies = new ArrayList<Movie>();
 	private ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
+	private ArrayList<Rating> ratings = new ArrayList<Rating>();
 	
 	public Model(){
 		fillWithDummy();
@@ -20,6 +21,41 @@ public class Model {
 		gebruikers.add(new Gebruiker("berkel", "van", "pieter", "pjeter", "pizza"));
 		gebruikers.add(new Gebruiker("visser", "", "thimo", "tito", "cola"));
 		gebruikers.add(new Gebruiker("frielink", "", "harm", "dieGozer", "jeesoon"));
+		
+		ratings.add(new Rating(5.0, gebruikers.get(0), movies.get(0)));
+		ratings.add(new Rating(3.0, gebruikers.get(0), movies.get(1)));
+		ratings.add(new Rating(2.5, gebruikers.get(1), movies.get(0)));
+		ratings.add(new Rating(1.0, gebruikers.get(2), movies.get(2)));
+		ratings.add(new Rating(4.0, gebruikers.get(2), movies.get(3)));
+	}
+	
+	/**
+	 * returns the movie corresponding to the given name/title
+	 * @param name the name/title of the movie
+	 * @return the movie if found otherwise null
+	 */
+	public Movie getMovieByName(String name){
+		for(Movie m : movies){
+			if(m.getTitel().equals(name)){
+				return m;
+			}
+		}
+		return null;
+	}
+	
+	public Rating[] getRatingsByMovie(Movie movie){
+		ArrayList<Rating> ratingsByMovie = new ArrayList<Rating>();
+		for(Rating r : ratings){
+			if(r.getMovie().equals(movie)){
+				ratingsByMovie.add(r);
+			}
+		}
+		
+		Rating[] array = new Rating[ratingsByMovie.size()];
+		for(int i = 0; i < ratingsByMovie.size(); i++){
+			array[i] = ratingsByMovie.get(i);
+		}
+		return array;
 	}
 	
 	public Movie getMovie(int id){
