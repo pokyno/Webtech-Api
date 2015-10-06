@@ -13,7 +13,8 @@ public class MyRest extends ResourceConfig{
 	private @Context ServletContext context;
 	
 	public MyRest(){
-		context.setAttribute("model", new Model());
+		super();
 		packages("io.github.pokyno.resources");
+		register(com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider.class);	
 	}
 }

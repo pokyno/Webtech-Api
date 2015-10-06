@@ -1,24 +1,45 @@
 package io.github.pokyno.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class Model {
 	private ArrayList<Movie> movies = new ArrayList<Movie>();
+	private ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
 	
 	public Model(){
 		fillWithDummy();
 	}
 	
 	public void fillWithDummy(){
-		movies.add(new Movie(126, "dieFilm", "john snow", "een film waar dingen in gebeuren enzo", new Date()));
-		movies.add(new Movie(134, "dieFilm the sequel", "john snow", "een film waar dingen in gebeuren voor de andere film", new Date(4,4,4)));
-		movies.add(new Movie(87, "dieFilm the sequel prequel prequel", "john snow", "een film waar dingen in gebeuren na de andere film voor de andere film", new Date(5,5,5)));
-		movies.add(new Movie(20000, "fuck/xml/the/movie", "grootste nachtmerrie", "xml iedereens grootste nachtmerrie waarom gebruiken we niet gewoon JSON voor alles...", new Date(13,12,11)));
+		movies.add(new Movie(126, "dieFilm", "john snow", "een film waar dingen in gebeuren enzo", "2/15/04"));
+		movies.add(new Movie(134, "dieFilm the sequel", "john snow", "een film waar dingen in gebeuren voor de andere film", "2/15/05"));
+		movies.add(new Movie(87, "dieFilm the sequel prequel prequel", "john snow", "een film waar dingen in gebeuren na de andere film voor de andere film", "2/15/06"));
+		movies.add(new Movie(20000, "fuck/xml/the/movie", "grootste nachtmerrie", "xml iedereens grootste nachtmerrie waarom gebruiken we niet gewoon JSON voor alles...", "10/6/15"));
+		
+		gebruikers.add(new Gebruiker("berkel", "van", "pieter", "pjeter", "pizza"));
+		gebruikers.add(new Gebruiker("visser", "", "thimo", "tito", "cola"));
+		gebruikers.add(new Gebruiker("frielink", "", "harm", "dieGozer", "jeesoon"));
 	}
 	
 	public Movie getMovie(int id){
 		return movies.get(id);
 	}
+	
+	public Movie[] getMovies(){
+		Movie[] movies = new Movie[this.movies.size()];
+		for(int i = 0; i < this.movies.size(); i++){
+			movies[i] = this.movies.get(i);
+		}
+		return movies;
+	}
+	
+	public Gebruiker[] getGebruikers(){
+		Gebruiker[] gebruikers = new Gebruiker[this.gebruikers.size()];
+		for(int i = 0; i < this.gebruikers.size(); i++){
+			gebruikers[i] = this.gebruikers.get(i);
+		}
+		return gebruikers;
+	}
+	
 }

@@ -3,14 +3,17 @@ package io.github.pokyno.model;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude
 @XmlRootElement
 public class Movie {
 	private static int counterId = 0, counterImdb = 0;
 	private int id, imdb, duur;
-	private String titel, regiseur, beschrijving;
-	private Date date;
+	private String titel, regiseur, beschrijving, date;
 	
 	public Movie(){
 		
@@ -26,11 +29,11 @@ public class Movie {
 	 * @param beschrijving
 	 * @param date
 	 */
-	public Movie(int duur, String titel, String regiseur, String beschrijving, Date date) {
-		this.id = this.counterId;
-		this.imdb = this.counterImdb;
-		this.counterId++;
-		this.counterImdb++;
+	public Movie(int duur, String titel, String regiseur, String beschrijving, String date) {
+		this.id = Movie.counterId;
+		this.imdb = Movie.counterImdb;
+		Movie.counterId++;
+		Movie.counterImdb++;
 		
 		this.duur = duur;
 		this.titel = titel;
@@ -43,7 +46,7 @@ public class Movie {
 	/**
 	 * @return the id
 	 */
-	@XmlAttribute
+	@XmlElement
 	public int getId() {
 		return id;
 	}
@@ -56,7 +59,7 @@ public class Movie {
 	/**
 	 * @return the imdb
 	 */
-	@XmlAttribute
+	@XmlElement
 	public int getImdb() {
 		return imdb;
 	}
@@ -69,7 +72,7 @@ public class Movie {
 	/**
 	 * @return the duur
 	 */
-	@XmlAttribute
+	@XmlElement
 	public int getDuur() {
 		return duur;
 	}
@@ -82,7 +85,7 @@ public class Movie {
 	/**
 	 * @return the titel
 	 */
-	@XmlAttribute
+	@XmlElement
 	public String getTitel() {
 		return titel;
 	}
@@ -95,7 +98,7 @@ public class Movie {
 	/**
 	 * @return the regiseur
 	 */
-	@XmlAttribute
+	@XmlElement
 	public String getRegiseur() {
 		return regiseur;
 	}
@@ -108,7 +111,7 @@ public class Movie {
 	/**
 	 * @return the beschrijving
 	 */
-	@XmlAttribute
+	@XmlElement
 	public String getBeschrijving() {
 		return beschrijving;
 	}
@@ -121,14 +124,14 @@ public class Movie {
 	/**
 	 * @return the date
 	 */
-	@XmlAttribute
-	public Date getDate() {
+	@XmlElement
+	public String getDate() {
 		return date;
 	}
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
