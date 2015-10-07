@@ -3,6 +3,7 @@ package io.github.pokyno.resources;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,18 +20,31 @@ public class GebruikerResource {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Response getGebruikers(){
+	public Response getGebruikers(@HeaderParam("auth-key") String key){
 		Model model = (Model) context.getAttribute("model");
+		if(key == null || !model.containsKey(key)){
+			return Response.status(401).build();
+		}
 		return Response.ok(model.getGebruikers()).build();
 	}
 	
 	@GET
-	@Path("{id}")
+	@Path("{nickname}")
 	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Response getSpecifiekeGebruiker(@PathParam("id") int id){
+	public Response getSpecifiekeGebruiker(@PathParam("nickname") String nickname,@HeaderParam("auth-key") String key){
 		Model model = (Model) context.getAttribute("model");
-		return Response.ok(model.getGebruikers()).build();
+		if(key.isEmpty() || key == null || !model.containsKey(key)){
+			return Response.status(401).build();
+		}
+		
+		if(model.getGebruikerByNickname(nickname) == null){
+			return Response.status(400).build();
+		}
+		
+		return Response.ok(model.getGebruikerByNickname(nickname)).build();
 	}
+	
+	
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_XML})

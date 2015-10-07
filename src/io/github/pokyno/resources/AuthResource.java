@@ -23,6 +23,12 @@ public class AuthResource {
 		}else if(!gebruiker.getWachtwoord().equals(password)){
 			return Response.status(412).build();
 		}
-		return Response.ok(username + " " + password).build();
+		
+		if(!model.hasKey(gebruiker)){
+			model.setKey(gebruiker);
+			return Response.ok().header("auth-key", model.getAuthKeyByUser(gebruiker)).build();
+		}else{
+			return Response.ok().header("auth-key", model.getAuthKeyByUser(gebruiker)).build();
+		}
 	}
 }

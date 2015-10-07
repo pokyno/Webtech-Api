@@ -1,12 +1,14 @@
 package io.github.pokyno.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Model {
 	private ArrayList<Movie> movies = new ArrayList<Movie>();
 	private ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
 	private ArrayList<Rating> ratings = new ArrayList<Rating>();
+	private HashMap<String, Gebruiker> authkeys = new HashMap<String, Gebruiker>();
 	
 	public Model(){
 		fillWithDummy();
@@ -29,6 +31,8 @@ public class Model {
 		ratings.add(new Rating(4.0, gebruikers.get(2), movies.get(3)));
 	}
 	
+	
+////////////////////////////movie	
 	/**
 	 * returns the movie corresponding to the given name/title
 	 * @param name the name/title of the movie
@@ -65,7 +69,7 @@ public class Model {
 		}
 		return movies;
 	}
-	
+////////////////////////////gebruiker
 	public Gebruiker[] getGebruikers(){
 		Gebruiker[] gebruikers = new Gebruiker[this.gebruikers.size()];
 		for(int i = 0; i < this.gebruikers.size(); i++){
@@ -82,5 +86,33 @@ public class Model {
 		}
 		return null;
 	}
+///////////////////////////auth
+	public void setKey(Gebruiker gebruiker){
+		//TODO key gen
+		authkeys.put("TEST KEY", gebruiker);
+	}
+	
+	public boolean hasKey(Gebruiker gebruiker){
+		for(String key : authkeys.keySet()){
+			if(authkeys.get(key).equals(gebruiker)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean containsKey(String key){
+		return authkeys.containsKey(key);
+	}
+	
+	public String getAuthKeyByUser(Gebruiker gebruiker){
+		for(String key : authkeys.keySet()){
+			if(authkeys.get(key).equals(gebruiker)){
+				return key;
+			}
+		}
+		return null;
+	}
+	
 	
 }

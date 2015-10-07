@@ -17,14 +17,5 @@ import io.github.pokyno.model.Rating;
 public class RatingResource {
 	private @Context ServletContext context;
 	
-	
-	@GET
-	@Path("{title}")
-	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Response getMovie(@PathParam("title") String titel){
-		Model model = (Model) context.getAttribute("model");
-		Movie movie = model.getMovieByName(titel);
-		Rating[] ratings = model.getRatingsByMovie(movie);
-		return Response.ok(ratings).build();
-	}
+	//TODO maak hier een post aan voor het posten van een rating
 }
