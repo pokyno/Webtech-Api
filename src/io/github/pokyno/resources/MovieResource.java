@@ -17,15 +17,6 @@ import io.github.pokyno.model.Rating;
 public class MovieResource {
 	private @Context ServletContext context;
 	
-	
-	@GET
-	@Path("{id}")
-	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Response getMovie(@PathParam("id") int id){
-		Model model = (Model) context.getAttribute("model");
-		return Response.ok(model.getMovie(id)).build();
-	}
-	
 	/**
 	 * berekend de average scores van de movie en geeft die lijst mee
 	 * @return de aangepaste lijst met movie objecten

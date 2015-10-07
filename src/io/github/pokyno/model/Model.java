@@ -58,10 +58,6 @@ public class Model {
 		return array;
 	}
 	
-	public Movie getMovie(int id){
-		return movies.get(id);
-	}
-	
 	public Movie[] getMovies(){
 		Movie[] movies = new Movie[this.movies.size()];
 		for(int i = 0; i < this.movies.size(); i++){
@@ -76,6 +72,15 @@ public class Model {
 			gebruikers[i] = this.gebruikers.get(i);
 		}
 		return gebruikers;
+	}
+	
+	public Gebruiker getGebruikerByNickname(String nickname){
+		for(Gebruiker g : gebruikers){
+			if(g.getNickname().equals(nickname)){
+				return g;
+			}
+		}
+		return null;
 	}
 	
 }
