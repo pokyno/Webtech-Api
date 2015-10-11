@@ -1,5 +1,6 @@
 package io.github.pokyno.model;
 
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -107,6 +108,11 @@ public class Gebruiker {
 	 */
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
+	}
+	
+	@Override
+	public String toString(){
+		return voornaam +" "+achternaam+" "+nickname+" "+wachtwoord;
 	}
 	
 	

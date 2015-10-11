@@ -86,10 +86,15 @@ public class Model {
 		}
 		return null;
 	}
+	
+	public void addGebruiker(Gebruiker gebruiker) {
+		gebruikers.add(gebruiker);
+	}
 ///////////////////////////auth
 	public void setKey(Gebruiker gebruiker){
-		//TODO key gen
-		authkeys.put("TEST KEY", gebruiker);
+		//de key zou normaal een random key zijn maar het is nu een statische die voor iedereen geld 
+		//dit is bewust gedaan om te zorgen dat postman vooraf gemaakte requests werken
+		authkeys.put("TEST_KEY", gebruiker);
 	}
 	
 	public boolean hasKey(Gebruiker gebruiker){
@@ -114,5 +119,23 @@ public class Model {
 		return null;
 	}
 	
+	public Gebruiker getGebruikerByKey(String key){
+		return authkeys.get(key);
+	}
 	
+	/////////////////rating
+	
+	public Rating[] getRatingsByGebruiker(Gebruiker gebruiker){
+		ArrayList<Rating> ratingsByMovie = new ArrayList<Rating>();
+		for(Rating r : ratings){
+			if(r.getGebruiker().equals(gebruiker)){
+				ratingsByMovie.add(r);
+			}
+		}
+		Rating[] array = new Rating[ratingsByMovie.size()];
+		for(int i = 0; i < ratingsByMovie.size(); i++){
+			array[i] = ratingsByMovie.get(i);
+		}
+		return array;
+	}	
 }
