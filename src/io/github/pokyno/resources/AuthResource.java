@@ -17,13 +17,15 @@ public class AuthResource {
 	@POST
 	public Response validateUser(@HeaderParam("username") String username, @HeaderParam("password") String password){
 		Model model = (Model) context.getAttribute("model");
+		//haal de gebruiker op 
 		Gebruiker gebruiker = model.getGebruikerByNickname(username);
+		//kijken of die wel bestaat en of het wachtwoord erbij klopt
 		if(gebruiker == null){
 			return Response.status(412).build();
 		}else if(!gebruiker.getWachtwoord().equals(password)){
 			return Response.status(412).build();
 		}
-		
+		//kijkt dan of de gebruiker al een key heeft zo nee maakt hij er een aan
 		if(!model.hasKey(gebruiker)){
 			model.setKey(gebruiker);
 			return Response.ok().header("auth-key", model.getAuthKeyByUser(gebruiker)).build();

@@ -6,7 +6,6 @@ import javax.ws.rs.core.Context;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
-import io.github.pokyno.model.Model;
 
 @ApplicationPath("/api")
 public class MyRest extends ResourceConfig{

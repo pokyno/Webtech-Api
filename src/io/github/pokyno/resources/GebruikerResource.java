@@ -1,7 +1,6 @@
 package io.github.pokyno.resources;
 
 
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
@@ -148,9 +147,7 @@ public class GebruikerResource {
 					gebruiker.setWachtwoord(children.item(i).getTextContent());
 				}
 			}
-			
-			System.out.println(gebruiker);
-			
+		
 			//controle of de juiste velden compleet zijn ingevuld
 			if(gebruiker.getAchternaam().isEmpty()){
 				return Response.status(400).build();
@@ -175,7 +172,7 @@ public class GebruikerResource {
 			model.addGebruiker(gebruiker);
 			
 			URI uri = new URI("/Webtech_Api/api/gebruikers/"+gebruiker.getNickname());
-//			
+			
 			return Response.created(uri).build();
 			
 		}catch(NullPointerException n){
